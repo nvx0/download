@@ -1,5 +1,5 @@
 # DownloadJS 💦
-"Libka" na pobieranie
+"Libka" na pobieranie, napisana bezcelu. Nie wspierana, dozwolone edytowanie i publikowanie bez zgody autora (czyli mnie 💤)
 
 # Jak ustawić żeby działało 💫
 ``1.`` Pobierz pliki
