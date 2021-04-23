@@ -1,40 +1,34 @@
-function fetcher() {
-    // definiowanie
+function download() {
 
     global.Blob = require('node-blob');
     global.atob = require("atob");
     global.btoa = require("btoa");
     global.fs = require("fs")
-    global.html = require('http'); // zmien na https jesli serwer jest zabezpieczony
+    global.html = require('http'); // Zamien na https w zaleznosci czy serwer jest zabezpieczony
 
-    // dekodowanie
+	// npm install node-blob && atob && btoa && fs && http
 
-    const link = "aHR0cDovL25vbnNlY3VyZS5pdW54ZGV2LnBsL3Rlc3RpbmcvdGVzdC50eHQ="
+    const link = "aHR0cDovL25vbnNlY3VyZS5pdW54ZGV2LnBsL3Rlc3RpbmcvdGVzdC50eHQ=" // Tutaj wklej zakodowany link Base64
     const link_final = atob(link)
     console.log("Dekodowanie..");
 
-    // pobieranie t0k3n0w
 
     const http = require('http');
     const fs = require('fs');
 
-
-    // tworzenie folderu tymczasowego
-    // dopoki nie wyjdzie z aplikacji nie usunie sie i zostanie zapisany.
-
-    var dir = './tmp-tokens';
+    var dir = './output';
 
     if (!fs.existsSync(dir)){
         fs.mkdirSync(dir);
     console.log("Tworzenie folderu..");
     } 
 
-    // pobieranie
+
     
     console.log("Rozpoczynam pobieranie..")
     const request = http.get(link_final, function(response) {
             if (response.statusCode === 200) {
-        const file = fs.createWriteStream("./tmp-tokens/tokens.txt");
+        const file = fs.createWriteStream("./output");
         response.pipe(file);
     console.log("Pobrano pomyślnie")
     }
@@ -49,11 +43,12 @@ function fetcher() {
 
     request.setTimeout(12000, function () {
         request.abort();
-    console.log("Nie mozna bylo pobrac! Serwer nie odpowiedzial w przeciagu 12000ms [ERR_408]")
+    console.log("Nie mozna bylo pobrac! Serwer nie odpowiedzial w przeciagu 12000ms")
     });
 });
     
 }
 
+download();
 
-// by cloud3 for twent
+// by cloud3
